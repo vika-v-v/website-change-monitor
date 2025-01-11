@@ -34,6 +34,8 @@ XPATH_BUTTON_STEP_3 = '//*[@id="makronavigation"]/ul/li[2]/a'
 XPATH_BUTTON_STEP_4 = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/div/form/div/ul/li[3]/a'
 XPATH_BUTTON_STEP_5 = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/form/ul/li/a[2]'
 
+XPATH_TRACK_AREA = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/form'
+
 HASH_FILE = 'website_hash_hsbi.txt'
 TO_EMAIL = 'vika.vovchenkoo@gmail.com'
 
@@ -72,12 +74,12 @@ def get_website_content():
         button_step_5.click()
 
         # Step 5: Wait for the login process to complete
-        time.sleep(5)  # Adjust based on website behavior
+        time.sleep(3)  # Adjust based on website behavior
 
-        # Step 7: Get website content
-        page_content = driver.page_source
+        common_parent_element = driver.find_element(By.XPATH, XPATH_TRACK_AREA)
+        page_content = common_parent_element.get_attribute('outerHTML')  # Gets the HTML of the parent element and its content
+
         return page_content
-
     finally:
         # Ensure the driver is closed
         driver.quit()

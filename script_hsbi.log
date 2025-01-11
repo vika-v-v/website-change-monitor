@@ -48,3 +48,47 @@ TypeError: 'NoneType' object is not iterable
 2025-01-11 13:50:06,192 - Website content changed! Email notification sent.
 2025-01-11 13:50:09,328 - Script started.
 2025-01-11 13:50:21,662 - Website content changed! Email notification sent.
+2025-01-11 13:56:48,094 - Script started.
+2025-01-11 13:57:24,196 - An error occurred:
+Traceback (most recent call last):
+  File "/Users/viktoriia/Desktop/website_tracker/script_hsbi.py", line 111, in main
+    content = get_website_content()
+  File "/Users/viktoriia/Desktop/website_tracker/script_hsbi.py", line 79, in get_website_content
+    common_parent_element = driver.find_element(By.XPATH, XPATH_TRACK_AREA)
+  File "/Users/viktoriia/Desktop/website_tracker/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 770, in find_element
+    return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/viktoriia/Desktop/website_tracker/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py", line 384, in execute
+    self.error_handler.check_response(response)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/viktoriia/Desktop/website_tracker/venv/lib/python3.13/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector
+from javascript error: {"status":32,"value":"Unable to locate an element with the xpath expression  because of the following error:\nSyntaxError: Failed to execute 'evaluate' on 'Document': The string '' is not a valid XPath expression."}
+  (Session info: chrome=131.0.6778.265); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalid-selector-exception
+Stacktrace:
+0   chromedriver                        0x00000001050f6138 cxxbridge1$str$ptr + 3653888
+1   chromedriver                        0x00000001050ee988 cxxbridge1$str$ptr + 3623248
+2   chromedriver                        0x0000000104b54968 cxxbridge1$string$len + 89228
+3   chromedriver                        0x0000000104b5984c cxxbridge1$string$len + 109424
+4   chromedriver                        0x0000000104b5b89c cxxbridge1$string$len + 117696
+5   chromedriver                        0x0000000104b5b944 cxxbridge1$string$len + 117864
+6   chromedriver                        0x0000000104b98a90 cxxbridge1$string$len + 368052
+7   chromedriver                        0x0000000104bd24f0 cxxbridge1$string$len + 604180
+8   chromedriver                        0x0000000104b8d564 cxxbridge1$string$len + 321672
+9   chromedriver                        0x0000000104b8e1b4 cxxbridge1$string$len + 324824
+10  chromedriver                        0x00000001050c0fc0 cxxbridge1$str$ptr + 3436424
+11  chromedriver                        0x00000001050c42dc cxxbridge1$str$ptr + 3449508
+12  chromedriver                        0x00000001050a7e60 cxxbridge1$str$ptr + 3333672
+13  chromedriver                        0x00000001050c4b9c cxxbridge1$str$ptr + 3451748
+14  chromedriver                        0x0000000105099678 cxxbridge1$str$ptr + 3274304
+15  chromedriver                        0x00000001050df2b4 cxxbridge1$str$ptr + 3560060
+16  chromedriver                        0x00000001050df430 cxxbridge1$str$ptr + 3560440
+17  chromedriver                        0x00000001050ee5fc cxxbridge1$str$ptr + 3622340
+18  libsystem_pthread.dylib             0x000000018262b034 _pthread_start + 136
+19  libsystem_pthread.dylib             0x0000000182625e3c thread_start + 8
+
+2025-01-11 13:57:26,860 - Script started.
+2025-01-11 13:57:36,956 - Website content changed! Email notification sent.
+2025-01-11 13:57:50,077 - Script started.
+2025-01-11 13:58:00,011 - Website content changed! Email notification sent.
