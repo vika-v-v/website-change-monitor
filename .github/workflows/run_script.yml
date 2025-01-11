@@ -19,7 +19,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: content-file
+          name: content_file_artifact
         continue-on-error: true # Allows workflow to proceed if artifact not found
 
       - name: Verify downloaded artifact
@@ -46,6 +46,6 @@ jobs:
       - name: Upload updated content file
         uses: actions/upload-artifact@v4
         with:
-          name: content-file
-          path: content_file.txt
-          retention-days: 7 # Retain for 7 days
+          name: content_file_artifact
+          path: content_file_artifact.txt
+      
