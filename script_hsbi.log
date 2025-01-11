@@ -1,0 +1,50 @@
+2025-01-11 13:38:49,777 - Script started.
+2025-01-11 13:38:55,511 - An error occurred:
+Traceback (most recent call last):
+  File "/Users/viktoriia/Desktop/website_tracker/script_hsbi.py", line 98, in main
+    content = get_website_content()
+  File "/Users/viktoriia/Desktop/website_tracker/script_hsbi.py", line 53, in get_website_content
+    password_field.send_keys(LOGIN_PASSWORD)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/viktoriia/Desktop/website_tracker/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py", line 232, in send_keys
+    Command.SEND_KEYS_TO_ELEMENT, {"text": "".join(keys_to_typing(value)), "value": keys_to_typing(value)}
+                                                   ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/viktoriia/Desktop/website_tracker/venv/lib/python3.13/site-packages/selenium/webdriver/common/utils.py", line 137, in keys_to_typing
+    characters.extend(val)
+    ~~~~~~~~~~~~~~~~~^^^^^
+TypeError: 'NoneType' object is not iterable
+2025-01-11 13:39:38,580 - Script started.
+2025-01-11 13:39:42,080 - An error occurred:
+Traceback (most recent call last):
+  File "/Users/viktoriia/Desktop/website_tracker/script_hsbi.py", line 98, in main
+    content = get_website_content()
+  File "/Users/viktoriia/Desktop/website_tracker/script_hsbi.py", line 53, in get_website_content
+    password_field.send_keys(LOGIN_PASSWORD)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "/Users/viktoriia/Desktop/website_tracker/venv/lib/python3.13/site-packages/selenium/webdriver/remote/webelement.py", line 232, in send_keys
+    Command.SEND_KEYS_TO_ELEMENT, {"text": "".join(keys_to_typing(value)), "value": keys_to_typing(value)}
+                                                   ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/viktoriia/Desktop/website_tracker/venv/lib/python3.13/site-packages/selenium/webdriver/common/utils.py", line 137, in keys_to_typing
+    characters.extend(val)
+    ~~~~~~~~~~~~~~~~~^^^^^
+TypeError: 'NoneType' object is not iterable
+2025-01-11 13:40:58,542 - Script started.
+2025-01-11 13:41:08,909 - Website content changed! Email notification sent.
+2025-01-11 13:41:16,718 - Script started.
+2025-01-11 13:41:26,504 - Website content changed! Email notification sent.
+2025-01-11 13:41:46,057 - Script started.
+2025-01-11 13:41:58,967 - Website content changed! Email notification sent.
+2025-01-11 13:42:04,034 - Script started.
+2025-01-11 13:42:22,021 - Website content changed! Email notification sent.
+2025-01-11 13:42:24,449 - Script started.
+2025-01-11 13:42:42,273 - Website content changed! Email notification sent.
+2025-01-11 13:42:51,981 - Script started.
+2025-01-11 13:43:36,957 - Website content changed! Email notification sent.
+2025-01-11 13:44:59,851 - Script started.
+2025-01-11 13:45:44,860 - Website content changed! Email notification sent.
+2025-01-11 13:48:31,137 - Script started.
+2025-01-11 13:49:06,321 - Website content changed! Email notification sent.
+2025-01-11 13:49:54,076 - Script started.
+2025-01-11 13:50:06,192 - Website content changed! Email notification sent.
+2025-01-11 13:50:09,328 - Script started.
+2025-01-11 13:50:21,662 - Website content changed! Email notification sent.
