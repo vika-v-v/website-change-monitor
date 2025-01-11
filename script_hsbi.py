@@ -1,18 +1,11 @@
 import os
 import yagmail
 from dotenv import load_dotenv
-import logging
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.chrome.options import Options
-
-
-logging.basicConfig(filename='script_hsbi.log', level=logging.INFO, format='%(asctime)s - %(message)s')
-
-# Example logging
-logging.info('Script started.')
 
 
 # Load environment variables
@@ -107,7 +100,7 @@ def send_email(subject, body):
 
 
 def main():
-    send_email('Start', 'start')
+    
     try:
         # Fetch the website content
         content = get_website_content()
@@ -118,15 +111,12 @@ def main():
             # Content has changed
             send_email("Website Updated", f"The website {WEBSITE_NAME} has been updated.")
             print("Website updated. Email sent.")
-            save_current_content(content)  # Save the new content
-            logging.warning('Website content changed! Email notification sent.')
+            save_current_content(content)
         else:
             print("No changes detected.")
-            logging.info('Content comparison successful. No change detected.')
 
     except Exception as e:
         print(f"An error occurred: {e}")
-        logging.error('An error occurred:', exc_info=True)
 
 if __name__ == "__main__":
     main()
