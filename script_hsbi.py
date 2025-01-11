@@ -34,9 +34,9 @@ XPATH_BUTTON_STEP_3 = '//*[@id="makronavigation"]/ul/li[2]/a'
 XPATH_BUTTON_STEP_4 = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/div/form/div/ul/li[3]/a'
 XPATH_BUTTON_STEP_5 = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/form/ul/li/a[2]'
 
-XPATH_TRACK_AREA = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/form'
+XPATH_TRACK_AREA = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/form/table[2]/tbody'
 
-HASH_FILE = 'website_hash_hsbi.txt'
+CONTENT_FILE = 'content_file.txt'
 TO_EMAIL = 'vika.vovchenkoo@gmail.com'
 
 
@@ -47,7 +47,7 @@ def get_website_content():
     try:
         # Step 1: Open the login page
         driver.get(LOGIN_URL)
-        time.sleep(2)
+        time.sleep(1)
 
         # Step 2: Enter username
         username_field = driver.find_element(By.XPATH, XPATH_LOGIN_USERNAME)
@@ -84,21 +84,17 @@ def get_website_content():
         # Ensure the driver is closed
         driver.quit()
 
-def calculate_hash(content):
-    """Calculate hash of the website content."""
-    return hashlib.sha256(content.encode('utf-8')).hexdigest()
-
-def load_previous_hash():
-    """Load the previously stored hash from file."""
-    if os.path.exists(HASH_FILE):
-        with open(HASH_FILE, 'r') as f:
+def load_previous_content():
+    """Load the previously stored content from file."""
+    if os.path.exists(CONTENT_FILE):
+        with open(CONTENT_FILE, 'r') as f:
             return f.read().strip()
     return None
 
-def save_current_hash(current_hash):
-    """Save the current hash to a file."""
-    with open(HASH_FILE, 'w') as f:
-        f.write(current_hash)
+def save_current_content(content):
+    """Save the current content to a file."""
+    with open(CONTENT_FILE, 'w') as f:
+        f.write(content)
 
 def send_email(subject, body):
     """Send an email notification."""
@@ -107,21 +103,20 @@ def send_email(subject, body):
 
 def main():
     try:
-        # Fetch the website content and calculate its hash
+        # Fetch the website content
         content = get_website_content()
-        current_hash = calculate_hash(content)
 
-        # Compare with the previous hash
-        previous_hash = load_previous_hash()
-        if previous_hash != current_hash:
+        # Compare with the previous content
+        previous_content = load_previous_content()
+        if previous_content != content:
             # Content has changed
             send_email("Website Updated", f"The website {WEBSITE_NAME} has been updated.")
             print("Website updated. Email sent.")
-            save_current_hash(current_hash)
+            save_current_content(content)  # Save the new content
             logging.warning('Website content changed! Email notification sent.')
         else:
             print("No changes detected.")
-            logging.info('Hash comparison successful. No change detected.')
+            logging.info('Content comparison successful. No change detected.')
 
     except Exception as e:
         print(f"An error occurred: {e}")
