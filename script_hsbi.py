@@ -106,6 +106,7 @@ def send_email(subject, body):
     yag.send(to=TO_EMAIL, subject=subject, contents=body)
 
 def main():
+    send_email('Start', 'start')
     try:
         # Fetch the website content
         content = get_website_content()
