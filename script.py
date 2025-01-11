@@ -111,10 +111,11 @@ def main():
             # Content has changed
             send_email("Website Updated", f"The website {WEBSITE_NAME} has been updated.")
             print("Website updated. Email sent.")
-            save_current_content(content)
         else:
             print("No changes detected.")
 
+        save_current_content(content)
+        
     except Exception as e:
         print(f"An error occurred: {e}")
 
