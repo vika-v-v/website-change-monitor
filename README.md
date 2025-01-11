@@ -38,8 +38,18 @@ cd website-change-monitor
 2. Click **New environment** and name it `Test`.
 
 ### Step 4: Set Up Secrets
-1. Navigate to **Settings** > **Environments** > **Test** > **Add environment secret**.
-2. Add the following secrets:
+1. Generate the encryption secret. For that, run the following code:
+Terminal: `pip3 install cryptography`, place in the venv if needed.
+Script:
+```bash
+from cryptography.fernet import Fernet
+key = Fernet.generate_key()
+print(key.decode())
+```
+or just comment out these lines from the end.
+2. Copy the generated code from the console to use it in the step 4.
+3. Navigate to **Settings** > **Environments** > **Test** > **Add environment secret**.
+4. Add the following secrets:
 
    | Secret Name      | Description                             |
    |------------------|-----------------------------------------|
@@ -47,15 +57,20 @@ cd website-change-monitor
    | `EMAIL_PASSWORD` | Password or app-specific password for your email |
    | `LOGIN_USERNAME` | Username for the website to monitor     |
    | `LOGIN_PASSWORD` | Password for the website to monitor     |
-3. The workflow will start atomatically and the script will be run every 20 Minutes (you can find the runs under **Actions**), the time can be changed at .github/workflows/run_script.yml, line 5. 
+   | `ENCRYPTION_KEY` | Key, generated in Step 1                |
+5. The workflow will start atomatically and the script will be run every 20 Minutes (you can find the runs under **Actions**), the time can be changed at .github/workflows/run_script.yml, line 5. 
+
+### Step 6: Allow Github Actions to read and write artefacts
+It is needed to update content_file.txt every run.
+For that, go to Settings -> Actions -> General -> Scroll to the bottom to 'Workflow permissions' and select 'Read and write permissions'.
 
 [optional]
 
-### Step 5: Run the Workflow manually
+### Step 7: Run the Workflow manually
 1. Go to the **Actions** tab in your repository.
 2. Select the **Run Python Script** Workflow at the top left and click **Run workflow** to start the monitoring process. Without it, the process
 
-### Step 6: Set Up the Project to Test Locally
+### Step 8: Set Up the Project to Test Locally
 
 1. **Create a Virtual Environment**: Run `venv create` to set up a virtual environment.
 2. **Install Dependencies**: Import the required packages by running `requirements.txt`.
@@ -88,7 +103,7 @@ The main script, `script.py`, orchestrates the entire process. Here's an outline
    - Adjust `.github/workflows/run_script.yml` for your requirements:
      - Modify check intervals (line 5).
      - Update the GitHub environment name (line 11).
-     - Configure environment variables (lines 31–34). If login isn't needed, remove those variables or add new ones if required.
+     - Configure environment variables (lines 79-82). If login isn't needed, remove those variables or add new ones if required.
    - Keep `.env` listed in `.gitignore` to prevent exposing sensitive data.
 
 2. **Compare Content**

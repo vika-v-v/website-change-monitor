@@ -121,3 +121,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Use this as ENCRYPTION_KEY
+# from cryptography.fernet import Fernet
+#
+# key = Fernet.generate_key()
+# print(key.decode())
