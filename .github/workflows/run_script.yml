@@ -11,16 +11,16 @@ jobs:
     environment: Test 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: content-file
         continue-on-error: true # In case there is no artifact from previous runs
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
@@ -41,7 +41,7 @@ jobs:
         run: python script.py
 
       - name: Upload updated content file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: content-file
           path: content_file.txt
