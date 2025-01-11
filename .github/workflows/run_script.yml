@@ -2,22 +2,22 @@ name: Run Python Script
 
 on:
   schedule:
-    - cron: '*/2 * * * *' # Every 20 minutes
+    - cron: '*/2 * * * *' # Every 2 minutes
   workflow_dispatch:
 
 jobs:
   run-script:
     runs-on: ubuntu-22.04
-    environment: Test 
+    environment: Test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: content-file
-        continue-on-error: true # In case there is no artifact from previous runs
+        continue-on-error: true # Allows the workflow to proceed even if the artifact is not found
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -41,7 +41,7 @@ jobs:
         run: python script.py
 
       - name: Upload updated content file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: content-file
           path: content_file.txt
