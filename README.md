@@ -79,7 +79,7 @@ The main script, `script.py`, orchestrates the entire process. Here's an outline
 1. **Fetch Website Content**
    - The script logs into a website and retrieves the required elements.
    - For websites requiring authentication, login steps are included. If you do not need a login or any steps, you can remove lines 50–71 in the script.
-   - Customize the steps based on your needs. You can add more URLs, steps, fields, or anything necessary to extract the desired data.
+   - Customize the steps based on your needs. You can add more URLs, steps, fields, or anything necessary to extract the desired data. Remove 'options=options' from line 42 to remove headless mode and allow to see the steps if needed.
    - For element selection, the script uses XPath. To find an XPath:
      - Open developer tools in your browser (F12).
      - Select the desired element.
