@@ -2,7 +2,7 @@ name: Run Python Script
 
 on:
   schedule:
-    - cron: '*/20 * * * *' # Every 20 minutes
+    - cron: '*/2 * * * *' # Every 20 minutes
   workflow_dispatch:
 
 jobs:
@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: content-file
+        continue-on-error: true # In case there is no artifact from previous runs
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -33,3 +39,9 @@ jobs:
           LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
         run: python script.py
+
+      - name: Upload updated content file
+        uses: actions/upload-artifact@v2
+        with:
+          name: content-file
+          path: content_file.txt
