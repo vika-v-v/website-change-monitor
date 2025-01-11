@@ -1,5 +1,3 @@
-import requests
-import hashlib
 import os
 import yagmail
 from dotenv import load_dotenv
@@ -8,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
+from selenium.webdriver.chrome.options import Options
 
 
 logging.basicConfig(filename='script_hsbi.log', level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -41,8 +40,13 @@ TO_EMAIL = 'vika.vovchenkoo@gmail.com'
 
 
 def get_website_content():
-    # Initialize Selenium WebDriver
-    driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument("--headless")  # Enable headless mode
+    options.add_argument("--disable-gpu")  # Disable GPU hardware acceleration (not strictly necessary but can improve performance)
+    options.add_argument("--no-sandbox")  # Avoid issues in certain environments (e.g., Docker)
+
+    # Initialize Selenium WebDriver with the specified options
+    driver = webdriver.Chrome(options=options)
 
     try:
         # Step 1: Open the login page
@@ -74,7 +78,7 @@ def get_website_content():
         button_step_5.click()
 
         # Step 5: Wait for the login process to complete
-        time.sleep(3)  # Adjust based on website behavior
+        time.sleep(1)  # Adjust based on website behavior
 
         common_parent_element = driver.find_element(By.XPATH, XPATH_TRACK_AREA)
         page_content = common_parent_element.get_attribute('outerHTML')  # Gets the HTML of the parent element and its content
