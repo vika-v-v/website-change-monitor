@@ -8,6 +8,7 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-22.04
+    environment: Test 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -26,4 +27,9 @@ jobs:
         run: ls -R
 
       - name: Run script
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
+          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
         run: python script_hsbi.py
