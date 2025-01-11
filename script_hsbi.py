@@ -102,8 +102,9 @@ def save_current_content(content):
 
 def send_email(subject, body):
     """Send an email notification."""
-    yag = yagmail.SMTP(EMAIL, EMAIL_PASSWORD)
+    yag = yagmail.SMTP(user=EMAIL, password=EMAIL_PASSWORD)
     yag.send(to=TO_EMAIL, subject=subject, contents=body)
+
 
 def main():
     send_email('Start', 'start')
