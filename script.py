@@ -115,7 +115,7 @@ def main():
             print("No changes detected.")
 
         save_current_content(content)
-        
+
     except Exception as e:
         print(f"An error occurred: {e}")
 

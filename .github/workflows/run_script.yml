@@ -13,18 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Debug List downloaded files
-        run: ls -R # Verify files present after checkout
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: content_file_artifact
-        continue-on-error: true # Allows workflow to proceed if artifact not found
-
-      - name: Verify downloaded artifact
-        run: cat content_file.txt || echo "No artifact found or file empty"
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -34,18 +22,61 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install cryptography
 
-      - name: Run script
+      - name: Decrypt file if exists
         env:
-          EMAIL: ${{ secrets.EMAIL }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
-          LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
-        run: python script.py
+          ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+        run: |
+          if [ -f "content_file.txt.encrypted" ]; then
+            python -c "
+            from cryptography.fernet import Fernet
+            import os
 
-      - name: Upload updated content file
-        uses: actions/upload-artifact@v4
-        with:
-          name: content_file_artifact
-          path: content_file.txt
-      
+            key = os.environ['ENCRYPTION_KEY'].encode()
+            f = Fernet(key)
+
+            with open('content_file.txt.encrypted', 'rb') as encrypted_file:
+                encrypted_data = encrypted_file.read()
+                
+            decrypted_data = f.decrypt(encrypted_data)
+
+            with open('content_file.txt', 'wb') as decrypted_file:
+                decrypted_file.write(decrypted_data)
+                        "
+                    fi
+
+                - name: Run script
+                    env:
+                    EMAIL: ${{ secrets.EMAIL }}
+                    EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+                    LOGIN_USERNAME: ${{ secrets.LOGIN_USERNAME }}
+                    LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
+                    run: python script.py
+
+                - name: Encrypt and save file
+                    env:
+                    ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
+                    run: |
+                    python -c "
+            from cryptography.fernet import Fernet
+            import os
+
+            key = os.environ['ENCRYPTION_KEY'].encode()
+            f = Fernet(key)
+
+            with open('content_file.txt', 'rb') as file:
+                data = file.read()
+                
+            encrypted_data = f.encrypt(data)
+
+            with open('content_file.txt.encrypted', 'wb') as encrypted_file:
+                encrypted_file.write(encrypted_data)
+          "
+
+      - name: Commit encrypted file
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add content_file.txt.encrypted
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update encrypted content [skip ci]" && git push)
