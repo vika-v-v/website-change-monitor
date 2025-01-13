@@ -60,7 +60,7 @@ or just comment out these lines from the end.</li>
    | `LOGIN_PASSWORD` | Password for the website to monitor     |
    | `ENCRYPTION_KEY` | Key, generated in Step 1                |
    </li>
-<li>The workflow will start atomatically and the script will be run every 20 Minutes (you can find the runs under **Actions**), the time can be changed at .github/workflows/run_script.yml, line 5. </li>
+<li>The workflow will start atomatically and the script will be run every 20 Minutes (you can find the runs under <b>Actions</b>), the time can be changed at .github/workflows/run_script.yml, line 5. </li>
 </ol>
 
 ### Step 6: Allow Github Actions to read and write artefacts
