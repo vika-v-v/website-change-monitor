@@ -49,7 +49,7 @@ print(key.decode())
 </pre>
 or just comment out these lines from the end.</li>
 <li>Copy the generated code from the console to use it in the step 4.</li>
-<li>Navigate to **Settings** > **Environments** > **Test** > **Add environment secret**.</li>
+<li>Navigate to <b>Settings</b> > <b>Environments</b> > <b>Test</b> > <b>Add environment secret</b>.</li>
 <li>Add the following secrets:
 
    | Secret Name      | Description                             |
