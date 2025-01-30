@@ -42,13 +42,14 @@ cd website-change-monitor
 ```
 
 ### Step 3: Remove the file content_file.txt.encrypted
+This file will be generated automatically if deleted, but it will return you an error if is encryped with another key and will not be regenerated. So just delete the file, but leave content_file.txt.
 
 
-### Step 3: Create the `Test` Environment
+### Step 4: Create the `Test` Environment
 1. Navigate to **Settings** > **Environments** in your forked repository.
 2. Click **New environment** and name it `Test`.
 
-### Step 4: Set Up Secrets
+### Step 5: Set Up Secrets
 Now you will need to generate a secret to encrypt the file with the website updates to that it's not visible in the internet.
 <ol>
 <li>Create and open a venv:
@@ -93,7 +94,10 @@ For that, go to Settings -> Actions -> General -> Scroll to the bottom to 'Workf
 1. Go to the **Actions** tab in your repository.
 2. Select the **Run Python Script** Workflow at the top left and click **Run workflow** to start the monitoring process. Without it, the process will still start, but you can run it manually.
 
-### Step 8: Set Up the Project to Test Locally
+### [optional] Step 8: Change the recepient Email
+Automatically, the recepient email is the same email you use to send it, but you can change the recepient under script.py, line 32 - TO_EMAIL variable.
+
+### [optional] Step 8: Set Up the Project to Test Locally
 
 1. **Create a Virtual Environment**: Run `venv create` to set up a virtual environment.
 2. **Install Dependencies**: Import the required packages by running `requirements.txt`.
@@ -105,7 +109,8 @@ For that, go to Settings -> Actions -> General -> Scroll to the bottom to 'Workf
    LOGIN_PASSWORD='password from the website'
    </pre>
 4. **Run the Script**: Execute the script to test its functionality.
-5. **Adapt to Your Needs**: Modify the script according to the documentation provided below.
+5. The encryption will not be used and you will see the content in content_file.txt, which will be compared later, so be carefull if you push it to public repository.
+6. **Adapt to Your Needs**: Modify the script according to the documentation provided below.
 
 ---
 
