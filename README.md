@@ -63,9 +63,12 @@ venv\Scripts\activate</pre></li>
 source venv/bin/activate</pre></li>
 </ul>
 </li>
+<li>
+Install dns to be able to send emails:<br>
+<pre>pip3 install dnspython</pre>
+</li>
 <li>Generate the encryption secret. For that, istall the cryptography-library:<br>
-<pre>pip3 install cryptography
-pip3 install dnspython</pre><br>
+<pre>pip3 install cryptography</pre><br>
 And paste this code to a separate file and run it:<br>
 <pre>
 from cryptography.fernet import Fernet
