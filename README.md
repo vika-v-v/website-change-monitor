@@ -65,7 +65,7 @@ source venv/bin/activate</pre></li>
 </li>
 <li>Generate the encryption secret. For that, istall the cryptography-library:<br>
 <pre>pip3 install cryptography
-pip3 install requests</pre><br>
+pip3 install dnspython</pre><br>
 And paste this code to a separate file and run it:<br>
 <pre>
 from cryptography.fernet import Fernet
