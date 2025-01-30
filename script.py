@@ -1,6 +1,6 @@
 import os
 import yagmail
-import requests
+import dns.resolver 
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -31,6 +31,17 @@ XPATH_TRACK_AREA = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/form/
 
 CONTENT_FILE = 'content_file.txt'
 TO_EMAIL = EMAIL
+
+SMTP_PROVIDERS = {
+    "gmail.com": {"host": "smtp.gmail.com", "port": 587, "use_ssl": False, "use_tls": True},
+    "outlook.com": {"host": "smtp.office365.com", "port": 587, "use_ssl": False, "use_tls": True},
+    "hotmail.com": {"host": "smtp.office365.com", "port": 587, "use_ssl": False, "use_tls": True},
+    "icloud.com": {"host": "smtp.mail.me.com", "port": 587, "use_ssl": False, "use_tls": True},
+    "yahoo.com": {"host": "smtp.mail.yahoo.com", "port": 465, "use_ssl": True, "use_tls": False},
+    "aol.com": {"host": "smtp.aol.com", "port": 465, "use_ssl": True, "use_tls": False},
+    "zoho.com": {"host": "smtp.zoho.com", "port": 587, "use_ssl": False, "use_tls": True},
+    "protonmail.com": {"host": "smtp.protonmail.com", "port": 465, "use_ssl": True, "use_tls": False},
+}
 
 
 def get_website_content():
@@ -95,25 +106,33 @@ def save_current_content(content):
         f.write(content)
 
 def get_smtp_settings(email):
-    """Fetch SMTP settings dynamically from an API."""
-    response = requests.get(f"https://email-provider-lookup.vercel.app/api?email={EMAIL}")
-    
-    if response.status_code == 200:
-        data = response.json()
-        return {
-            "host": data.get("smtp_host"),
-            "port": data.get("smtp_port"),
-            "use_ssl": data.get("smtp_ssl", False),
-            "use_tls": data.get("smtp_tls", True)
-        }
-    else:
-        print("Failed to fetch SMTP settings. Using default Gmail.")
-        return {
-            "host": "smtp.gmail.com",
-            "port": 587,
-            "use_ssl": False,
-            "use_tls": True
-        }
+    """Determines the SMTP settings based on email domain."""
+    domain = email.split('@')[-1]
+
+    if domain in SMTP_PROVIDERS:
+        return SMTP_PROVIDERS[domain]
+
+    # If the domain is unknown, perform an MX record lookup
+    try:
+        mx_records = dns.resolver.resolve(domain, 'MX')
+        mx_host = str(mx_records[0].exchange).rstrip('.')
+
+        # Basic provider detection using MX host
+        if "google" in mx_host:
+            return SMTP_PROVIDERS["gmail.com"]
+        elif "outlook" in mx_host or "office365" in mx_host:
+            return SMTP_PROVIDERS["outlook.com"]
+        elif "yahoo" in mx_host:
+            return SMTP_PROVIDERS["yahoo.com"]
+        elif "icloud" in mx_host:
+            return SMTP_PROVIDERS["icloud.com"]
+
+    except Exception as e:
+        print(f"MX Lookup Failed: {e}")
+
+    # Default to Gmail if nothing is found
+    print("Unknown email provider. Using default Gmail settings.")
+    return SMTP_PROVIDERS["gmail.com"]
         
 
 def send_email(subject, body):
