@@ -22,12 +22,20 @@ I use this project to track changes on my university portal for grade updates, b
 
 ---
 
+## Prerequisites
+- You have Python installed.
+
+---
+
 ## How to Fork and Use This Project
+
+This project works without any need for change for all HSBI students who use LSF to recieve their marks, in this case you would need to just follow the steps, otherwise you will need to change the part where you access the website.
 
 ### Step 1: Fork the Repository
 1. Click the **Fork** button at the top-right corner of this repository to create your own copy.
 
 ### Step 2: Clone Your Forked Repository
+Open the terminal in your IDE and run:
 ```bash
 git clone https://github.com/your-username/website-change-monitor.git
 cd website-change-monitor
@@ -38,16 +46,27 @@ cd website-change-monitor
 2. Click **New environment** and name it `Test`.
 
 ### Step 4: Set Up Secrets
+Now you will need to generate a secret to encrypt the file with the website updates to that it's not visible in the internet.
 <ol>
-<li>Generate the encryption secret. For that, run the following code:<br>
-   Terminal: `pip3 install cryptography`, place in the venv if needed.<br>
-   Script:<br>
+<li>Create and open a venv:
+<ul><li>For Windows (CMD):
+   <pre>
+python -m venv venv
+venv\Scripts\activate</pre></li>
+   <li>For Mac/Linux:
+<pre>python3 -m venv venv
+source venv/bin/activate</pre></li>
+</ul>
+</li>
+<li>Generate the encryption secret. For that, istall the cryptography-library:<br>
+<pre>pip3 install cryptography</pre><br>
+And paste this code to a separate file and run it:<br>
 <pre>
 from cryptography.fernet import Fernet
 key = Fernet.generate_key()
 print(key.decode())
 </pre>
-or just comment out these lines from the end.</li>
+or just comment out these lines from the end of the script.py.</li>
 <li>Copy the generated code from the console to use it in the step 4.</li>
 <li>Navigate to <b>Settings</b> > <b>Environments</b> > <b>Test</b> > <b>Add environment secret</b>.</li>
 <li>Add the following secrets:
@@ -69,7 +88,7 @@ For that, go to Settings -> Actions -> General -> Scroll to the bottom to 'Workf
 
 ### [optional] Step 7: Run the Workflow manually
 1. Go to the **Actions** tab in your repository.
-2. Select the **Run Python Script** Workflow at the top left and click **Run workflow** to start the monitoring process. Without it, the process
+2. Select the **Run Python Script** Workflow at the top left and click **Run workflow** to start the monitoring process. Without it, the process will still start, but you can run it automatically
 
 ### Step 8: Set Up the Project to Test Locally
 
