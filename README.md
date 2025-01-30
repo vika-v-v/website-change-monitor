@@ -41,6 +41,9 @@ git clone https://github.com/your-username/website-change-monitor.git
 cd website-change-monitor
 ```
 
+### Step 3: Remove the file content_file.txt.encrypted
+
+
 ### Step 3: Create the `Test` Environment
 1. Navigate to **Settings** > **Environments** in your forked repository.
 2. Click **New environment** and name it `Test`.
@@ -88,7 +91,7 @@ For that, go to Settings -> Actions -> General -> Scroll to the bottom to 'Workf
 
 ### [optional] Step 7: Run the Workflow manually
 1. Go to the **Actions** tab in your repository.
-2. Select the **Run Python Script** Workflow at the top left and click **Run workflow** to start the monitoring process. Without it, the process will still start, but you can run it automatically
+2. Select the **Run Python Script** Workflow at the top left and click **Run workflow** to start the monitoring process. Without it, the process will still start, but you can run it manually.
 
 ### Step 8: Set Up the Project to Test Locally
 
