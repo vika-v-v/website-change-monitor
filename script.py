@@ -29,7 +29,7 @@ XPATH_BUTTON_STEP_5 = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/fo
 XPATH_TRACK_AREA = '//*[@id="wrapper"]/div[5]/table/tbody/tr/td/div/div[2]/form/table[2]/tbody'
 
 CONTENT_FILE = 'content_file.txt'
-TO_EMAIL = 'vika.vovchenkoo@gmail.com'
+TO_EMAIL = EMAIL
 
 
 def get_website_content():
