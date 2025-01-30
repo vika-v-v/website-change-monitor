@@ -24,6 +24,7 @@ I use this project to track changes on my university portal for grade updates, b
 
 ## Prerequisites
 - You have Python installed.
+- You have a common email-Adress, like gmail, icloid; you cannot use a company-specific email for that because of the ports used to send an email.
 
 ---
 
