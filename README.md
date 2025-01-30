@@ -24,7 +24,7 @@ I use this project to track changes on my university portal for grade updates, b
 
 ## Prerequisites
 - You have Python installed.
-- You have a common email-Adress, like gmail, icloid; you cannot use a company-specific email for that because of the ports used to send an email.
+- You have one of the following email-addresses: gmail, outlook, icloud, yahoo. If you don't, use step 10 to add your provider.
 
 ---
 
@@ -99,7 +99,7 @@ For that, go to Settings -> Actions -> General -> Scroll to the bottom to 'Workf
 ### [optional] Step 8: Change the recepient Email
 Automatically, the recepient email is the same email you use to send it, but you can change the recepient under script.py, line 32 - TO_EMAIL variable.
 
-### [optional] Step 8: Set Up the Project to Test Locally
+### [optional] Step 9: Set Up the Project to Test Locally
 
 1. **Create a Virtual Environment**: Run `venv create` to set up a virtual environment.
 2. **Install Dependencies**: Import the required packages by running `requirements.txt`.
@@ -113,6 +113,11 @@ Automatically, the recepient email is the same email you use to send it, but you
 4. **Run the Script**: Execute the script to test its functionality.
 5. The encryption will not be used and you will see the content in content_file.txt, which will be compared later, so be carefull if you push it to public repository.
 6. **Adapt to Your Needs**: Modify the script according to the documentation provided below.
+
+### [if your email is not listed among available providers] Step 10: add your email provider
+1. Add a new email provider to SMTP_PROVIDERS constant at script.py (line 35); use the same structure as other providers.
+2. In the method get_smtp_settings, add your email to available providers by adding your provider to the if-else-structure in lines 121-128.
+3. Feel free to merge and push your changes to this repository!
 
 ---
 
