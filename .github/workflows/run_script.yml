@@ -2,7 +2,7 @@ name: Run Python Script
 
 on:
   schedule:
-    - cron: '*/20 * * * *' # Every 20 minutes
+    - cron: '*/1500 * * * *' # Every day - every 1500 Minutes
   workflow_dispatch:
 
 jobs:
