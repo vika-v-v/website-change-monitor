@@ -102,12 +102,14 @@ def main():
     previous_content = app.at(LoadPreviousContentTransaction).result
 
     if previous_content != content:
-        app.at(SendEmailTransaction("Website Updated", "The tracked content has changed."))
+        app.at(
+            SendEmailTransaction, subject="Website Updated", body="The tracked content has changed."
+        )
         print("Website updated. Email sent.")
     else:
         print("No changes detected.")
 
-    app.at(SaveCurrentContentTransaction(content))
+    app.at(SaveCurrentContentTransaction, content=content)
     app.at(setup.CloseApp)
 
     return content
