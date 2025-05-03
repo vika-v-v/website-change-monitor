@@ -28,3 +28,4 @@ urllib3==2.3.0
 websocket-client==1.8.0
 wsproto==1.2.0
 yagmail==0.15.293
+guara==0.0.10
